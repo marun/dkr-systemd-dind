@@ -59,9 +59,17 @@ RUN systemctl mask\
 RUN cp /usr/lib/systemd/system/dbus.service /etc/systemd/system/;\
  sed -i 's/OOMScoreAdjust=-900//' /etc/systemd/system/dbus.service
 
+# Remove non-english translations for glibc to reduce image size by 100mb.
+# docker-v1.10-migrator won't be needed for a new docker installation
+# selinux-policy-minimum won't be needed because dind doesn't work with selinux
 RUN dnf -y update && dnf -y install\
  docker\
+ glibc-langpack-en\
  iptables\
+ && dnf -y remove\
+ docker-v1.10-migrator\
+ glibc-all-langpacks\
+ selinux-policy-minimum\
  && dnf clean all
 
 ## Configure docker
