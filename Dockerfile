@@ -19,7 +19,7 @@
 #      $ docker run -d --privileged maru/systemd-dind
 #
 
-FROM fedora:24
+FROM centos:centos7
 
 # Fix 'WARNING: terminal is not fully functional' when TERM=dumb
 ENV TERM=xterm
@@ -59,10 +59,10 @@ RUN systemctl mask\
 RUN cp /usr/lib/systemd/system/dbus.service /etc/systemd/system/;\
  sed -i 's/OOMScoreAdjust=-900//' /etc/systemd/system/dbus.service
 
-RUN dnf -y update && dnf -y install\
+RUN yum -y update && yum -y install\
  docker\
  iptables\
- && dnf clean all
+ && yum clean all
 
 ## Configure docker
 
