@@ -19,7 +19,7 @@
 #      $ docker run -d --privileged maru/systemd-dind
 #
 
-FROM fedora:24
+FROM fedora:25
 
 # Fix 'WARNING: terminal is not fully functional' when TERM=dumb
 ENV TERM=xterm
