@@ -20,6 +20,7 @@
 #
 
 FROM fedora:28
+MAINTAINER marun@redhat.com
 
 # Fix 'WARNING: terminal is not fully functional' when TERM=dumb
 ENV TERM=xterm
