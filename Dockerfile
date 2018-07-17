@@ -61,11 +61,17 @@ RUN cp /usr/lib/systemd/system/dbus.service /etc/systemd/system/;\
  sed -i 's/OOMScoreAdjust=-900//' /etc/systemd/system/dbus.service
 
 RUN dnf -y update && dnf -y install\
- docker\
+ dnf-plugins-core\
  iptables\
  && dnf clean all
 
-## Configure docker
+RUN dnf config-manager --add-repo\
+ https://download.docker.com/linux/fedora/docker-ce.repo
+
+RUN dnf -y install docker-ce\
+ && dnf clean all
+
+# Configure docker
 
 RUN systemctl enable docker.service
 
